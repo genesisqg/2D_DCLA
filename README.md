@@ -6,20 +6,18 @@ A computational model for diffusion limited cluster aggregation was created for 
 
 ## Introduction 
 Aggregation behavior is prevalent in a number of natural and industrial systems, such as polymer manufacturing, pharmaceutics, protein production, and many more [7]. Studies on aggregation growth and structure are key to understanding the nature of these processes. To this end, many models have been constructed that simulate aggregation processes, such as diffusion limited cluster aggregation (DLCA). In DLCA, a lattice is filled with monomers and they are allowed to move in a random walk, until they collide with one another to form larger clusters. Multiple clusters can exist at the same time within the lattice, unlike diffusion limited aggregation, where only one fractal is formed. DLCA models have been constructed to take in various inputs or be solved in multiple dimensions [1, 3]. Here, a model for DLCA in 2-D and 3-D is presented and the fractal dimension is measured.
-Clusters formed from DLCA can be approximated as fractal objects. This approximation allows us to measure the fractal dimension, D_f, and use it to characterize our model and compare to experimental data. Fractal scaling relates the mass of each cluster, i, and size of the cluster by the fractal dimension, $D_f$,
+Clusters formed from DLCA can be approximated as fractal objects. This approximation allows us to measure the fractal dimension, $D_f$, and use it to characterize our model and compare to experimental data. Fractal scaling relates the mass of each cluster, i, and size of the cluster by the fractal dimension, $D_f$,
  
-$i=k_f (R_g/a)^(D_f )$
-	(1)
+$$i=k_f (R_g/a)^(D_f)$$ (1)
 where R_g is the radius of gyration of the cluster, a is the size of the principle particle, and k_f is a pre-factor [7]. The radius of gyration is calculated by,
 
-$R_g^2=1/N ∑_(k=1)^N▒(r ⃑_k-r ⃑_mean )^2 $
-	(2)
-where r ⃑_k is the position of the k^th particle, and r ⃑_mean is the position of the center of mass of the cluster [2]. The fractal dimension can be determined by fitting the data to Equation 1 once i, R_g, and a are measured. The pre-factor, k_f, has also been shown to be related to the fractal dimension via,
+$$R_g^2 = 1/N \sum_(k=1)^N (\vec{r_k}-\vec{r_{mean}})^2$$ (2)
+where $\vec{r_k}$ is the position of the $k^th$ particle, and $\vec{r_{mean}}$ is the position of the center of mass of the cluster [2]. The fractal dimension can be determined by fitting the data to Equation 1 once $i$, $R_g$, and $a$ are measured. The pre-factor, $k_f$, has also been shown to be related to the fractal dimension via,
 
-$k_f=4.46 D_f^(-2.08)$	(3)
+$$k_f=4.46 D_f^(-2.08)$$	(3)
 	
-which was determined numerically [1]. Both Equation 1 and 2 will be used to characterize the clusters formed. Since these equations are only valid for large cluster sizes, any clusters smaller than $R_g$/a = 10 in 2-D and $R_g$/a = 2 in 3-D will not be considered.
-According to Equations 1 and 3, in order to get values of D_f that agree with experimental calculations and other models [3, 6, 7], we should expect a k_f of around 1.117 in order to obtain a $D_f$ of about 1.85 in 2-D. Similarly, to get a $D_f$ of about 2.45 in 3D, we should expect a $k_f$ of around 0.6916.
+which was determined numerically [1]. Both Equation 1 and 2 will be used to characterize the clusters formed. Since these equations are only valid for large cluster sizes, any clusters smaller than $R_g/a$ = 10 in 2-D and $R_g/a$ = 2 in 3-D will not be considered.
+According to Equations 1 and 3, in order to get values of D_f that agree with experimental calculations and other models [3, 6, 7], we should expect a $k_f$ of around 1.117 in order to obtain a $D_f$ of about 1.85 in 2-D. Similarly, to get a $D_f$ of about 2.45 in 3D, we should expect a $k_f$ of around 0.6916.
 
 ## Methods
 There are a number of algorithms available to perform DLCA simulations [3 – 5]. For this model, first a number of assumptions were made. It is assumed that the user will input a value for the initial desired volume fraction, $\Phi_0$, and the N x N size of the lattice. In addition, it is assumed that all clusters have the same diffusion coefficient, regardless of cluster size or mass. Finally, periodic boundary conditions are imposed on all sides of the lattice such that clusters can move freely across all axes.
