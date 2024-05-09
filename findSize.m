@@ -1,0 +1,102 @@
+function [s,flag,Rg,Rs] = findSize(V,c,map)
+%Finds the size of cluster c where the "size" is the maximum height or
+%length 2-D
+
+%V is the matrix with indeces of all monomers, c is the cluster we want to
+%find the size of
+sz = size(map);
+N = sz(1)-1;
+flag=0;
+l = max(size(V));
+j=1;
+
+for i=1:l
+    if V(i,3)==c
+        y(j)=V(i,1);
+        x(j)=V(i,2);
+        j=j+1;
+    end
+end
+num=max(size(y));
+maxy = max(y);
+miny=min(y);
+maxx=max(x);
+minx=min(x);
+avgy = mean(y);
+avgx = mean(x);
+
+
+count1=1;
+count2=1;
+%if cluster crosses a boundary
+if minx==1 && maxx==sz(1) %need to find new minx and maxx
+    for i = 1:num
+        scaled_x=x(i)-sz(1)/2; %this will scale the cluster
+        if scaled_x>0
+            posx(count1)=scaled_x;
+            index(i,1) = count1;  %index keeps track of each location of xi
+            index(i,2) = 1; %so we can rearrange later....
+            count1=count1+1;
+        elseif scaled_x<0
+            negx(count2)=scaled_x;
+            index(i,1) = count2;
+            index(i,2) = -1;
+            count2=count2+1;
+        end
+    end
+    [xvec,l] = findVec(posx,negx,index,map);
+elseif minx==maxx
+    l=1;
+    for i = 1:num
+        xvec(i) = 0;
+    end
+else
+    l=abs(maxx-minx+1);
+    for i = 1:num
+        xvec(i) = (x(i) - avgx)^2;
+    end
+end
+
+count1=1;
+count2=1;
+%do the same for y direction
+if miny==1 && maxy==sz(1) %need to find new miny and maxx
+    for i = 1:num
+        scaled_y=y(i)-sz(1)/2; %this will scale the cluster
+        if scaled_y>0
+            posy(count1)=scaled_y;
+            index(i,1)=count1;
+            index(i,2)=1;
+            count1=count1+1;
+        elseif scaled_y<0
+            negy(count2)=scaled_y;
+            index(i,1)=count2;
+            index(i,2)=-1;
+            count2=count2+1;
+        end
+    end
+    [yvec,h] = findVec(posy,negy,index,map);
+elseif maxy==miny
+    h=1;
+    for i = 1:num
+        yvec(i) = 0;
+    end
+else
+    h=abs(maxy-miny+1);
+    for i = 1:num
+        yvec(i) = (y(i) - avgy)^2;
+    end
+end
+
+if (h > sz(1)/2) || (l > sz(1)/2)
+    flag=1;
+end
+
+%so theoretically we now have the height and length, need Rg
+R_squared = xvec+yvec;
+Rg = sqrt(mean(R_squared));
+a = 0.5; % a is the radius of one particle
+Rs=sqrt((h/2)^2+(l/2)^2); %Rs is the radius of the smallest circle that would encompass the whole cluster
+s=Rg/a;
+
+end
