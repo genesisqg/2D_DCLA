@@ -9,9 +9,11 @@ Aggregation behavior is prevalent in a number of natural and industrial systems,
 Clusters formed from DLCA can be approximated as fractal objects. This approximation allows us to measure the fractal dimension, $D_f$, and use it to characterize our model and compare to experimental data. Fractal scaling relates the mass of each cluster, i, and size of the cluster by the fractal dimension, $D_f$,
  
 $$i=k_f (R_g/a)^(D_f)$$ (1)
+
 where $R_g$ is the radius of gyration of the cluster, $a$ is the size of the principle particle, and $k_f$ is a pre-factor [7]. The radius of gyration is calculated by,
 
-$$R_g^2 = 1/N \sum_(k=1)^N (\vec{r_k}-\vec{r_{mean}})^2$$ (2)
+$$R_g^2 = 1/N \sum_{k=1}^N (\vec{r_k}-\vec{r_{mean}})^2$$ (2)
+
 where $\vec{r_k}$ is the position of the $k^th$ particle, and $\vec{r_{mean}}$ is the position of the center of mass of the cluster [2]. The fractal dimension can be determined by fitting the data to Equation 1 once $i$, $R_g$, and $a$ are measured. The pre-factor, $k_f$, has also been shown to be related to the fractal dimension via,
 
 $$k_f=4.46 D_f^{-2.08}$$	(3)
