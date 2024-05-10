@@ -10,7 +10,7 @@ Clusters formed from DLCA can be approximated as fractal objects. This approxima
  
 $$i=k_f (R_g/a)^(D_f)$$ (1)
 
-$c^2 = a^2+b^2$
+$$c^2 = a^2+b^2$$
 
 where $R_g$ is the radius of gyration of the cluster, $a$ is the size of the principle particle, and $k_f$ is a pre-factor [7]. The radius of gyration is calculated by,
 
